@@ -6,19 +6,23 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index()
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
-
-        $homeRoute = route('home');
-        $newsRoute = route('news');
-        $adminRoute = route('admin.admin');
-
-        return <<<php
-<a href="{$homeRoute}">Главная</a>
-<a href="{$newsRoute}">Новости</a>
-<a href="{$adminRoute}">Админка</a>
-<h1>Добро пожаловать</h1>
-php;
+        //$this->middleware('auth');
     }
 
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        return view('index')->with('name', 'Dear friend');
+    }
 }

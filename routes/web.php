@@ -16,7 +16,7 @@ Route::group([
     'namespace' => 'Admin', // папка расположения файла контроллера
     'as' => 'admin.'
 ], function(){
-    Route::get('/admin', 'IndexController@index')->name('admin'); 
+    Route::get('/index', 'IndexController@index')->name('admin'); 
     Route::get('/test1', 'IndexController@test1')->name('test1');
     Route::get('/test2', 'IndexController@test2')->name('test2');
 });
@@ -25,9 +25,19 @@ Route::group([
 // Route::get('/test1', 'Admin\IndexController@test1');
 // Route::get('/test2', 'Admin\IndexController@test2');
 
-Route::get('/news', 'NewsController@news')->name('news');
-Route::get('/news/{catName}', 'NewsController@getCategory');
-Route::get('/news/{catName}/{newsId}', 'NewsController@getNewsElem');
+
+Route::group(
+    [
+        'prefix' => 'news',
+        'as' => 'news.',
+    ], function(){
+        Route::get('/all', 'NewsController@news')->name('all');
+        Route::get('/one/{newsId}', 'NewsController@newsOne')->name('one');
+        Route::get('/categories', 'NewsController@categories')->name('categories');
+        Route::get('/category/{id}', 'NewsController@categoryId')->name('categoryId');
+        Route::get('/add', 'NewsController@addNews')->name('add');
+    }
+);
 
 
 // Route::get('/news', function () {
@@ -37,3 +47,6 @@ Route::get('/news/{catName}/{newsId}', 'NewsController@getNewsElem');
 // Route::get('/about', function () {
 //     return view('about');
 // });
+
+Auth::routes();
+

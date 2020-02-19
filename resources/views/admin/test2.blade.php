@@ -1,13 +1,13 @@
 @extends('layouts.main')
 
 @section('title')
-    @parent Главная
+    @parent Тест2
 @endsection
 
 @section('menu')
-    @include('menu.main')
+    @include('menu.admin')
 @endsection
 
 @section('content')
-    <h1>Добро пожаловать {{ $name }}</h1>
+    <h1>Тест2</h1>
 @endsection
